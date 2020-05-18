@@ -7,8 +7,7 @@ module.exports = (options) => {
     const socketIOStream = require('socket.io-stream')
 
     io.on('connect', () => {
-      console.log(`${new Date()}: connected`)
-      console.log(`${new Date()}: requesting public url via ${options.server}`)
+      console.log(`requesting public url via ${options.server}`)
 
       io.emit(
         'claim',
@@ -21,14 +20,19 @@ module.exports = (options) => {
           if (response) {
             if (response.error) {
               console.log(`${new Date()}: claim error: ${response.error}`)
-            } else if (response.url) {
-              console.log(`${new Date()}: public url: ${response.url}`)
+
+              // reject(response.error)
+            } else if (response.https && response.http) {
+              console.log(`public https: ${response.https}`)
+              console.log(`public http: ${response.http}`)
 
               resolve(response)
+            } else {
+              console.log(response)
             }
+          } else {
+            console.log(response)
           }
-
-          console.log(response)
         }
       )
 
@@ -51,7 +55,9 @@ module.exports = (options) => {
           exposeClient.end()
         })
 
-        client.on('error', () => {
+        exposeClient.on('error', () => {
+          console.log('exposeClient: error')
+
           const stream = socketIOStream.createStream()
 
           socketIOStream(io).emit(params.id, stream)
