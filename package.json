@@ -1,6 +1,6 @@
 {
-  "name": "@luewell/expose",
-  "version": "1.0.0",
+  "name": "@luewell/expose-services",
+  "version": "1.0.1",
   "description": "Secure introspectable tunnels to localhost",
   "main": "index.js",
   "repository": "git@github.com:luewell/expose.services-cli.git",
