@@ -1,5 +1,5 @@
 {
-  "name": "expose-services",
+  "name": "@luewell/expose",
   "version": "1.0.0",
   "description": "Secure introspectable tunnels to localhost",
   "main": "index.js",
